@@ -1,0 +1,96 @@
+@()
+
+@main("yUML | Generate UML Diagram") {
+  <style>
+    .input-field input:focus + label {
+      color: #0678CB !important;
+    }
+    .input-field textarea:focus + label {
+      color: #0678CB !important;
+    }
+    /* label underline focus color */
+    .row .input-field input:focus {
+      border-bottom: 1px solid #0678CB !important;
+      box-shadow: 0 1px 0 0 #0678CB !important
+    }  
+    .row .input-field textarea:focus {
+      border-bottom: 1px solid #0678CB !important;
+      box-shadow: 0 1px 0 0 #0678CB !important
+    }
+    textarea.materialize-textarea{height: 6rem;}
+    ul li img{
+      width: 25% !important;
+      height: 25% !important;
+    }
+
+   </style>
+  <nav>
+    <div class="nav-wrapper" style="background: #0678CB;">
+      <a href="#" class="brand-logo center"> <img src="https://yuml.me/assets/yuml_logo-20fa733bb97b2f215775b0487da394ca48cff0d690b7d3e2257bd95307ccd9c6.png" alt="yUML Logo" width="90px" style="margin-top: 0.2em"></a>
+    </div>
+  </nav>
+  <h4 class="center" style="color:#5195CE;">
+    Configurando diagrama 
+  </h4>
+
+  <div class="container" style="border: 1px solid #d4d4d4; margin-top: 1em; padding: 2em">
+    <div class="row">
+      <form class="col s12" action="@controllers.routes.HomeController.gerarDiagrama()" method="POST">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="ator" type="text" name="ator" required >
+            <label for="ator">Nome do ator</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="textarea1" class="materialize-textarea" name="casos" required ></textarea>
+            <label for="textarea1">Casos de Uso (Um por linha)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <select name="cor" required >
+              <option value="" disabled selected>Selecionar</option>
+              <option value="1">Sim</option>
+              <option value="0">Não</option>
+            </select>
+            <label>Colorido?</label>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <select class="icons" name="formato" required >
+              <option value="" disabled selected>Selecionar</option>
+              <option value="scruffy" data-icon="https://yuml.me/images/draw_scruffy.png" class="circle" >Scruffy</option>
+              <option value="nofunky" data-icon="https://yuml.me/images/draw_boring.png" class="circle">Boring</option>
+              <option value="plain" data-icon="https://yuml.me/images/draw_plain.png" class="circle">Plain</option>
+            </select>
+            <label>Formato</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <select name="tipo" required >
+              <option value="" disabled selected>Selecionar</option>
+              <option value=".png">PNG</option>
+              <option value=".jpg">JPEG</option>
+              <option value=".svg">SVG</option>
+              <option value=".pdf">PDF</option>
+            </select>
+            <label>Tipo de Saída</label>
+            <span class="helper-text" style="color: tomato">O formato <b>JPEG</b> demora mais para carregar (Caso não apareça, recarregue a página)</span>
+
+          </div>
+        </div>       
+        
+        <br>
+        <button style="margin-top: 1em; width: 100%;background: #0678CB" class="btn waves-effect waves-light btn-large"  type="submit" name="action" id="submit">Gerar Diagrama
+          <i class="material-icons right">image</i>
+        </button>
+
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+}

@@ -1,0 +1,12 @@
+target
+src/.vscode
+src/.settings
+src/.g8
+src/.gradle
+src/.idea
+src/.idea_modules
+src/.classpath
+src/.project
+src/RUNNING_PID
+src/svc
+src/bin/
