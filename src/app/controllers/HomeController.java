@@ -19,7 +19,7 @@ public class HomeController extends Controller {
 
         int contadorAtor = Integer.parseInt(r.get("contadorAtores")[0]);
 
-        System.out.println(contadorAtor);
+        System.out.println("\nAtores = "+contadorAtor);
 
         boolean cor_;
         if(cor.equals("0")){
@@ -34,24 +34,63 @@ public class HomeController extends Controller {
         String url = "http://yuml.me/diagram/"+formato+"/usecase/";
 
         for(int j = 1; j <= contadorAtor; j++){
+            // As variaveis ator e casos estao sendo geradas aqui para que caso haja mais de um ator, elas recebam o conteudo de campos distintos.
             String ator = r.get("ator"+j)[0];
             String[] casos = r.get("casos"+j)[0].split("\\r?\\n");
 
             for(int i = 0; i < casos.length; i++){
                 int corAleatoria = new Random().nextInt(cores.length);
+
+                String casoDeUso = "";
+                int indexTagCorPersonalizada = 0; 
+
     
                 if(cor_ == true){
-                    url += "["+ator+"]-("+casos[i]+")"+"{bg:"+cores[corAleatoria]+"})";    
+                    boolean temCor = false;
+                    for (int k = 0; k < casos[i].length(); k++) { 
+                        System.out.print(casos[i].charAt(k));   
+                        if(casos[i].charAt(k) == '#'){
+                            temCor = true;
+                            indexTagCorPersonalizada = k;
+                        }
+                    }
+                    if(temCor){
+                        casoDeUso = casos[i].substring(0, indexTagCorPersonalizada);
+                        url += "["+ator+"]-("+casoDeUso+")"+"{bg:"+cores[corAleatoria]+"})";    
+
+                    }else{
+                        url += "["+ator+"]-("+casos[i]+")"+"{bg:"+cores[corAleatoria]+"})";    
+                    }
                 }else{
-                    url += "["+ator+"]-("+casos[i]+")"+")";
+                    boolean temCor = false;
+        
+                    for (int k = 0; k < casos[i].length(); k++) { 
+                        System.out.print(casos[i].charAt(k));   
+                        if(casos[i].charAt(k) == '#'){
+                            temCor = true;
+                            indexTagCorPersonalizada = k;
+                        }
+                    }
+
+                    casoDeUso = casos[i].substring(0, indexTagCorPersonalizada);
+                    String corPersonalizada = casos[i].substring(indexTagCorPersonalizada+1, casos[i].length() );
+                    
+                    if(temCor){
+                        url += "["+ator+"]-("+casoDeUso+")"+"{bg:"+corPersonalizada+"})";
+                        System.out.println(" {TEM COR }= "+corPersonalizada);
+                    }else{
+                        url += "["+ator+"]-("+casos[i]+")"+"{bg:})";    
+                        System.out.println(" {NAO TEM COR}");
+
+                    }
+                    
                 }
                 if(i != casos.length -1){
                     url += ",";
                 }
             }
+            url += ",";
         }
-
-        System.out.println(url);
 
         if(tipo.equals(".pdf")){
             return redirect(url+tipo);

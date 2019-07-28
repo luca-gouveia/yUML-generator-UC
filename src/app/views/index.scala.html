@@ -52,7 +52,7 @@
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <textarea id="textarea1" class="materialize-textarea" name="casos1" placeholder="Casos de Uso (Um por linha)" required ></textarea>
+              <textarea id="textarea1" class="materialize-textarea" name="casos1" placeholder="Casos de Uso (Um por linha) Exemplo: Caso1 #red ou Caso1" required ></textarea>
             </div>
           </div>
         </div>
@@ -71,10 +71,11 @@
           <div class="input-field col s12">
             <select name="cor" required >
               <option value="" disabled selected>Selecionar</option>
-              <option value="1">Sim</option>
-              <option value="0">Não</option>
-            </select>
-            <label>Colorido?</label>
+              <option value="1">Automaticamente</option>
+              <option value="0">Personalizado</option>
+            </select>            
+            <label>Colorir?</label>
+            <span class="helper-text" style="color: tomato">Para colorir de forma personalizada, adicione na mesma linha do caso de uso #nomeDaCor <a href="https://yuml.me/69f3a9ba.svg" target="_blank"><i style="color: #000;" class="material-icons right tooltipped" data-position="right" data-tooltip="Cores disponíveis">color_lens</i></span></a> 
           </div>
         </div> 
         <div class="row">
