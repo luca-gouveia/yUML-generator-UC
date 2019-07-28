@@ -34,7 +34,7 @@ public class HomeController extends Controller {
         String url = "http://yuml.me/diagram/"+formato+"/usecase/";
 
         for(int j = 1; j <= contadorAtor; j++){
-            // As variaveis ator e casos estao sendo geradas aqui para que caso haja mais de um ator, elas recebam o conteudo de campos distintos.
+            // As variaveis ator e casos estao sendo geradas aqui pois caso haja mais de um ator, elas conseguirão receber multiplos valores (de acordo com a quantidade da var contadorAtor e a iteracao).
             String ator = r.get("ator"+j)[0];
             String[] casos = r.get("casos"+j)[0].split("\\r?\\n");
 
