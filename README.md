@@ -14,5 +14,7 @@ Dentro da pasta **/src**, execute o seguinte comando:
     
 ## Imagens do Sistema
 
-### Aplicação
+### Aplicação (Atual)
+![enter image description here](https://raw.githubusercontent.com/luca-gouveia/yUML-generator-UC/master/images/aplicacao-v1.png)
+### Aplicação (Antiga)
 ![enter image description here](https://raw.githubusercontent.com/luca-gouveia/yUML-generator-UC/master/images/aplicacao.png)
