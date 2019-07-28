@@ -13,11 +13,13 @@ public class HomeController extends Controller {
     public Result gerarDiagrama() {
         Map<String, String[]> r =
           request().body().asFormUrlEncoded();
-        String ator = r.get("ator")[0];
-        String[] casos = r.get("casos")[0].split("\\r?\\n");
         String formato = r.get("formato")[0];
         String tipo = r.get("tipo")[0];
         String cor = r.get("cor")[0];
+
+        int contadorAtor = Integer.parseInt(r.get("contadorAtores")[0]);
+
+        System.out.println(contadorAtor);
 
         boolean cor_;
         if(cor.equals("0")){
@@ -31,18 +33,25 @@ public class HomeController extends Controller {
         
         String url = "http://yuml.me/diagram/"+formato+"/usecase/";
 
-        for(int i = 0; i < casos.length; i++){
-            int corAleatoria = new Random().nextInt(cores.length);
+        for(int j = 1; j <= contadorAtor; j++){
+            String ator = r.get("ator"+j)[0];
+            String[] casos = r.get("casos"+j)[0].split("\\r?\\n");
 
-            if(cor_ == true){
-                url += "["+ator+"]-("+casos[i]+")"+"{bg:"+cores[corAleatoria]+"})";    
-            }else{
-                url += "["+ator+"]-("+casos[i]+")"+")";
-            }
-            if(i != casos.length -1){
-                url += ",";
+            for(int i = 0; i < casos.length; i++){
+                int corAleatoria = new Random().nextInt(cores.length);
+    
+                if(cor_ == true){
+                    url += "["+ator+"]-("+casos[i]+")"+"{bg:"+cores[corAleatoria]+"})";    
+                }else{
+                    url += "["+ator+"]-("+casos[i]+")"+")";
+                }
+                if(i != casos.length -1){
+                    url += ",";
+                }
             }
         }
+
+        System.out.println(url);
 
         if(tipo.equals(".pdf")){
             return redirect(url+tipo);

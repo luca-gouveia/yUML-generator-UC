@@ -23,6 +23,10 @@
       height: 25% !important;
     }
 
+    h5{
+      margin: 1em 0;
+    }
+
    </style>
   <nav>
     <div class="nav-wrapper" style="background: #0678CB;">
@@ -36,18 +40,33 @@
   <div class="container" style="border: 1px solid #d4d4d4; margin-top: 1em; padding: 2em">
     <div class="row">
       <form class="col s12" action="@controllers.routes.HomeController.gerarDiagrama()" method="POST">
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="ator" type="text" name="ator" required >
-            <label for="ator">Nome do ator</label>
+       
+      <div id=ator-area>
+        <div class="row" id="ator-campos">
+          <div class="row">
+            
+            <div class="input-field col s12">
+              <h5>Ator 1</h5>
+              <input id="ator" type="text" name="ator1" placeholder="Nome do ator" required >
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="textarea1" class="materialize-textarea" name="casos1" placeholder="Casos de Uso (Um por linha)" required ></textarea>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <textarea id="textarea1" class="materialize-textarea" name="casos" required ></textarea>
-            <label for="textarea1">Casos de Uso (Um por linha)</label>
-          </div>
+      </div>
+
+        <!-- Contador de Atores - Passa para o BackEnd o numero de novos atores(campos) que devem ser processsados / Campo oculto-->
+        <div>
+          <input id="contadorAtores" type="text" value="1" name="contadorAtores" style="display: none">
         </div>
+
+        <div class="row">
+          <a onclick="gerarCampo()" style="background: #5bc236" class="btn-floating btn-small waves-effect waves-light tooltipped" data-position="right" data-tooltip="Adicionar ator"><i class="material-icons">add</i></a>
+        </div>
+        
         <div class="row">
           <div class="input-field col s12">
             <select name="cor" required >
@@ -93,4 +112,35 @@
     </div>
   </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+    function gerarCampo() {
+      var contAtor = document.getElementById("contadorAtores").value;
+      contAtor++
+      document.getElementById("contadorAtores").value = contAtor;
+      console.log(contAtor);
+
+      var tituloAtor = document.createElement("H5");
+      var tituloAtorTexto = document.createTextNode("Ator "+contAtor);
+      tituloAtor.appendChild(tituloAtorTexto);                                   
+
+
+      var campoNomeAtor = document.createElement("INPUT");
+      campoNomeAtor.setAttribute("type", "text");
+      campoNomeAtor.setAttribute("id", "atorDinamico");
+      campoNomeAtor.setAttribute("name", "ator"+contAtor);
+      campoNomeAtor.setAttribute("placeholder", "Nome do ator");
+
+      var campoCasosUso = document.createElement("TEXTAREA");
+      campoCasosUso.setAttribute("class", "materialize-textarea");
+      campoCasosUso.setAttribute("id", "casosDinamico");
+      campoCasosUso.setAttribute("name", "casos"+contAtor);
+      campoCasosUso.setAttribute("placeholder", "Casos de Uso (Um por linha)  ");
+
+      document.getElementById("ator-campos").appendChild(tituloAtor);
+      document.getElementById("ator-campos").appendChild(campoNomeAtor);
+      document.getElementById("ator-campos").appendChild(campoCasosUso);
+
+      
+    }
+  </script>
 }
