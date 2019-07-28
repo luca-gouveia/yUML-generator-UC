@@ -3,7 +3,8 @@
 Gerador de Casos de Uso yUML com Play! Framework
 
 # Atualização
-Agora é possível adicionar mais de um ator (28/07/2019)
+- Agora é possível adicionar mais de um ator (28/07/2019)
+- Cores personalizadas para cada caso de uso (28/07/2019)
 
 ## Para executar
 Dentro da pasta **/src**, execute o seguinte comando:
